@@ -52,15 +52,24 @@ public class Game extends ApplicationAdapter {
 		batch.end();
 
 		if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-			dino.x -= 200 * Gdx.graphics.getDeltaTime();
+		    float dinoXPosition = dino.x -= 200 * Gdx.graphics.getDeltaTime();
+			dinoSprite.setPosition(dinoXPosition,dino.y);
+			dino.x = dinoXPosition;
 		}
+
 		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-			dino.x += 200 * Gdx.graphics.getDeltaTime();
-		}
+		    float dinoXPosition = dino.x += 200 * Gdx.graphics.getDeltaTime();
+            dinoSprite.setPosition(dinoXPosition,dino.y);
+            dino.x = dinoXPosition;
+        }
 
-		if(dino.x < 0) dino.x = 0;
-		if(dino.x > 800 - 64) dino.x = 800 - 64;
-
+		if(dino.x < 0) {
+		    dino.x = 0;
+        }
+		if(dino.x > 800 - 27) {
+		    dino.x = 800 - 27;
+        }
+		
 	}
 	
 	@Override
