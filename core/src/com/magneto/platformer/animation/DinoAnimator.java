@@ -1,30 +1,28 @@
-package com.magneto.platformer;
+package com.magneto.platformer.animation;
 
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import lombok.Getter;
+import lombok.Setter;
 
-public class DinoAnimator implements ApplicationListener {
+public class DinoAnimator {
 
     private static final int FRAME_COLS = 24, FRAME_ROWS=1;
 
-    Animation<TextureRegion> walkAnimation;
-    Texture walkSheet;
-    SpriteBatch spriteBatch;
-
-    float stateTime;
+    @Getter @Setter private Animation<TextureRegion> walkAnimation;
+    @Getter @Setter private Texture walkSheet;
+    @Getter @Setter private SpriteBatch spriteBatch;
+    @Getter @Setter private float stateTime;
 
     public DinoAnimator(){
-
-
+        createTextures();
     }
-    @Override
-    public void create(){
 
+    //Create textures
+    private void createTextures(){
         walkSheet = new Texture(Gdx.files.internal("dinoDoux.png"));
         // Use the split utility method to create a 2D array of TextureRegions. This is
         // possible because this sprite sheet contains frames of equal size and they are
@@ -48,43 +46,7 @@ public class DinoAnimator implements ApplicationListener {
 
         // Instantiate a SpriteBatch for drawing and reset the elapsed animation
         // time to 0
-        spriteBatch = new SpriteBatch();
         stateTime = 0f;
-
     }
-
-    @Override
-    public void resize(int width, int height) {
-
-    }
-
-    @Override
-    public void render() {
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear screen
-        stateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
-
-        // Get current frame of animation for the current stateTime
-        TextureRegion currentFrame = walkAnimation.getKeyFrame(stateTime, true);
-        spriteBatch.begin();
-        spriteBatch.draw(currentFrame, 50, 50); // Draw current frame at (50, 50)
-        spriteBatch.end();
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void dispose() { // SpriteBatches and Textures must always be disposed
-        spriteBatch.dispose();
-        walkSheet.dispose();
-    }
-
 
 }

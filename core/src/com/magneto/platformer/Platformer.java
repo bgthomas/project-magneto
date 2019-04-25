@@ -4,16 +4,18 @@ package com.magneto.platformer;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.magneto.platformer.screen.MainMenuScreen;
+import lombok.Getter;
+import lombok.Setter;
 
 
 public class Platformer extends Game {
 
-	public SpriteBatch spriteBatch;
-	public BitmapFont bitmapFont;
+	@Getter @Setter	private SpriteBatch spriteBatch;
+	@Getter @Setter private BitmapFont bitmapFont;
 
 	public void create(){
 		spriteBatch = new SpriteBatch();
-		//Use LibGDX's default Arial font.
 		bitmapFont = new BitmapFont();
 		this.setScreen(new MainMenuScreen(this));
 	}
