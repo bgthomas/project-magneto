@@ -10,12 +10,14 @@ import lombok.Setter;
 
 public class DinoAnimator {
 
-    private static final int FRAME_COLS = 24, FRAME_ROWS=1;
+    private static final int FRAME_COLS = 14, FRAME_ROWS=1;
 
     @Getter @Setter private Animation<TextureRegion> walkAnimation;
+    @Getter @Setter private Animation<TextureRegion> walkAnimationLeft;
     @Getter @Setter private Texture walkSheet;
     @Getter @Setter private SpriteBatch spriteBatch;
     @Getter @Setter private float stateTime;
+    @Getter @Setter private String direction;
 
     public DinoAnimator(){
         createTextures();
@@ -23,7 +25,21 @@ public class DinoAnimator {
 
     //Create textures
     private void createTextures(){
-        walkSheet = new Texture(Gdx.files.internal("dinoDoux.png"));
+        walkSheet = new Texture(Gdx.files.internal("dinoDouxV2Right.png"));
+
+        TextureRegion[] walkFrames = generateWalkFrames(walkSheet);
+
+        // Initialize the Animation with the frame interval and array of frames
+        walkAnimation = new Animation<TextureRegion>(0.025f, walkFrames);
+
+        // Instantiate a SpriteBatch for drawing and reset the elapsed animation
+        // time to 0
+        stateTime = 0f;
+
+    }
+
+    private TextureRegion[] generateWalkFrames(Texture walkSheet) {
+
         // Use the split utility method to create a 2D array of TextureRegions. This is
         // possible because this sprite sheet contains frames of equal size and they are
         // all aligned.
@@ -41,12 +57,6 @@ public class DinoAnimator {
             }
         }
 
-        // Initialize the Animation with the frame interval and array of frames
-        walkAnimation = new Animation<TextureRegion>(0.025f, walkFrames);
-
-        // Instantiate a SpriteBatch for drawing and reset the elapsed animation
-        // time to 0
-        stateTime = 0f;
+        return walkFrames;
     }
-
 }

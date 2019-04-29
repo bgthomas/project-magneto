@@ -23,8 +23,8 @@ public class MainMenuScreen implements Screen {
     public void render(final float delta) {
 
         //DEBUGGING TO SKIP SCREEN FOR NOW
-        //game.setScreen(new GameScreen(game));
-        //dispose();
+        game.setScreen(new GameScreen(game));
+        dispose();
 
         Gdx.gl.glClearColor(0, 0, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

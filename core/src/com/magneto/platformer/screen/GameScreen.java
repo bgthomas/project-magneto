@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.magneto.platformer.Platformer;
 import com.magneto.platformer.animation.DinoAnimator;
+
 import lombok.NonNull;
 
 public class GameScreen implements Screen {
@@ -46,18 +47,40 @@ public class GameScreen implements Screen {
 
         dinoAnimationStateTime = dinoAnimator.getStateTime();
 
+        TextureRegion currentFrame;
+        boolean flip = false;
+
         //if right is pressed calculate animation state time else reset it back to 0 (standing state)
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             dinoAnimationStateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
             dinoPosition += 1;
-        } else {
+
+            if(dinoAnimator.getDirection() == "LEFT") {
+                 flip = true;
+            }
+            dinoAnimator.setDirection("RIGHT");
+
+        } else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+            dinoAnimationStateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
+            dinoPosition -= 1;
+
+            if(dinoAnimator.getDirection() == "RIGHT") {
+                flip = true;
+            }
+            dinoAnimator.setDirection("LEFT");
+        }
+        else {
             dinoAnimationStateTime = 0.0f;
         }
 
-        // Get current frame of animation for the current stateTime
-        TextureRegion currentFrame = dinoAnimator.getWalkAnimation().getKeyFrame(dinoAnimationStateTime, false);
-
         batch.begin();
+
+        currentFrame = dinoAnimator.getWalkAnimation().getKeyFrame(dinoAnimationStateTime, true);
+
+        if(flip){
+            currentFrame.flip(true, false);
+        }
+
         batch.draw(currentFrame,dinoPosition,0, 50, 50); // Draw current frame at (50, 50)
         batch.end();
 
