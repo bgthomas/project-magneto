@@ -55,6 +55,7 @@ project(":desktop") {
         compile "com.badlogicgames.gdx:gdx-bullet-platform:$gdxVersion:natives-desktop"
         compileOnly 'org.projectlombok:lombok:1.18.6'
         annotationProcessor 'org.projectlombok:lombok:1.18.6'
+        compile "com.codeandweb.physicseditor:gdx-pe-loader:1.1.0"
     }
 }
 
@@ -73,6 +74,7 @@ project(":core") {
         compile "com.badlogicgames.gdx:gdx-bullet:$gdxVersion"
         compileOnly 'org.projectlombok:lombok:1.18.6'
         annotationProcessor 'org.projectlombok:lombok:1.18.6'
+        compile "com.codeandweb.physicseditor:gdx-pe-loader:1.1.0"
     }
 }
 

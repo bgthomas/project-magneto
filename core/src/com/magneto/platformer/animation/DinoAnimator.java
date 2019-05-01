@@ -25,7 +25,7 @@ public class DinoAnimator {
 
     //Create textures
     private void createTextures(){
-        walkSheet = new Texture(Gdx.files.internal("dinoDouxV2Right.png"));
+        walkSheet = new Texture(Gdx.files.internal("dinoV2.png"));
 
         TextureRegion[] walkFrames = generateWalkFrames(walkSheet);
 
