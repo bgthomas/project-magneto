@@ -7,13 +7,16 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Box2D;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.World;
 import com.magneto.platformer.Platformer;
 import com.magneto.platformer.animation.DinoAnimator;
-import com.badlogic.gdx.math.Vector2;
-
-import com.codeandweb.physicseditor.PhysicsShapeCache;
-
+import com.magneto.platformer.physic.DinoPhysics;
+import com.magneto.platformer.physic.LevelPhysics;
+import com.magneto.platformer.physic.PhysicsCacheManager;
+import com.magneto.platformer.physic.WorldPhysics;
 import lombok.NonNull;
 
 public class GameScreen implements Screen {
@@ -22,20 +25,14 @@ public class GameScreen implements Screen {
     private final OrthographicCamera camera;
     private final SpriteBatch batch;
     private final DinoAnimator dinoAnimator;
+    private final LevelPhysics levelPhysics;
+    private final WorldPhysics worldPhysics;
+    private final DinoPhysics dinoPhysics;
+    private final World world;
 
-    private float dinoPosition = 0;
     private float dinoAnimationStateTime;
-    private World world;
-    float accumulator = 0;
 
-    static final float STEP_TIME = 1f / 60f;
-    static final int VELOCITY_ITERATIONS = 6;
-    static final int POSITION_ITERATIONS = 2;
-
-    Box2DDebugRenderer debugRenderer;
-    PhysicsShapeCache physicsBodies;
-    Body dinoBody;
-    Body ground;
+    private Box2DDebugRenderer debugRenderer;
 
     public GameScreen(@NonNull final Platformer game){
 
@@ -45,38 +42,28 @@ public class GameScreen implements Screen {
         camera = new OrthographicCamera();
         camera.setToOrtho(false,800,480);
 
+        //Animation
         dinoAnimator = new DinoAnimator();
-
         batch = new SpriteBatch();
 
         Box2D.init();
         debugRenderer = new Box2DDebugRenderer();
 
+        //Physics dude
         world = new World(new Vector2(0, -120), true);
-        physicsBodies = new PhysicsShapeCache(Gdx.files.internal("physics.xml"));
+        levelPhysics = new LevelPhysics(world,camera);
+        worldPhysics = new WorldPhysics(world);
 
-        dinoBody = physicsBodies.createBody("dinoSingle", world, 1.4f, 1.4f);
-        dinoBody.setTransform(40,100, 0);
+        PhysicsCacheManager physicsCacheManager = new PhysicsCacheManager();
+        dinoPhysics = new DinoPhysics(world,physicsCacheManager);
 
-    }
-
-    private void stepWorld() {
-        float delta = Gdx.graphics.getDeltaTime();
-
-        accumulator += Math.min(delta, 0.25f);
-
-        if (accumulator >= STEP_TIME) {
-            accumulator -= STEP_TIME;
-
-            world.step(STEP_TIME, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
-        }
     }
 
     @Override
     public void render (final float delta) {
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        stepWorld();
+        worldPhysics.stepWorld();
 
         camera.update();
 
@@ -85,66 +72,26 @@ public class GameScreen implements Screen {
         dinoAnimationStateTime = dinoAnimator.getStateTime();
 
         TextureRegion currentFrame;
-        boolean flip = false;
-
-        /*else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-            dinoAnimationStateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
-            dinoPosition -= 1;
-
-            if(dinoAnimator.getDirection() == "RIGHT") {
-                flip = true;
-            }
-            dinoAnimator.setDirection("LEFT");
-        }
-        else {
-            dinoAnimationStateTime = 0.0f;
-        }
-        */
 
         batch.begin();
 
-
-        /*if(flip){
-            currentFrame.flip(true, false);
-        }*/
-
-        Vector2 position = dinoBody.getPosition();
-        currentFrame = dinoAnimator.getWalkAnimation().getKeyFrame(0, true);
+        Vector2 position = dinoPhysics.getDinoBody().getPosition();
+        currentFrame = dinoAnimator.getWalkAnimation().getKeyFrame(dinoAnimationStateTime, true);
 
         //if right is pressed calculate animation state time else reset it back to 0 (standing state)
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            dinoBody.applyLinearImpulse(500, 0, position.x,position.y, true);
+            dinoPhysics.getDinoBody().applyLinearImpulse(500, 0, position.x,position.y, true);
+            dinoAnimationStateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
         }
+
         batch.draw(currentFrame,position.x,position.y, 50, 50); // Draw current frame at (50, 50)
         batch.end();
 
-        //dinoAnimator.setStateTime(dinoAnimationStateTime);
+        dinoAnimator.setStateTime(dinoAnimationStateTime);
 
         debugRenderer.render(world, camera.combined);
 
     }
-
-    private void createGround() {
-        if (ground != null) world.destroyBody(ground);
-
-        BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.StaticBody;
-
-        FixtureDef fixtureDef = new FixtureDef();
-
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(camera.viewportWidth, 1);
-
-        fixtureDef.shape = shape;
-        fixtureDef.friction = 1;
-
-        ground = world.createBody(bodyDef);
-        ground.createFixture(fixtureDef);
-        ground.setTransform(0, 0, 0);
-
-        shape.dispose();
-    }
-
 
     @Override
     public void dispose() {
@@ -158,7 +105,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void resize(final int width, final int height) {
-        createGround();
+        levelPhysics.createGround();
     }
 
     @Override
