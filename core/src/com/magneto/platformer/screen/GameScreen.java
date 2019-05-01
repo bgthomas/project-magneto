@@ -57,6 +57,8 @@ public class GameScreen implements Screen {
         PhysicsCacheManager physicsCacheManager = new PhysicsCacheManager();
         dinoPhysics = new DinoPhysics(world,physicsCacheManager);
 
+        levelPhysics.createGround();
+
     }
 
     @Override
@@ -105,7 +107,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void resize(final int width, final int height) {
-        levelPhysics.createGround();
     }
 
     @Override
