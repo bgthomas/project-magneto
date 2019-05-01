@@ -87,17 +87,7 @@ public class GameScreen implements Screen {
         TextureRegion currentFrame;
         boolean flip = false;
 
-        //if right is pressed calculate animation state time else reset it back to 0 (standing state)
-        /*if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            dinoAnimationStateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
-            dinoPosition += 1;
-
-            if(dinoAnimator.getDirection() == "LEFT") {
-                 flip = true;
-            }
-            dinoAnimator.setDirection("RIGHT");
-
-        } else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+        /*else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
             dinoAnimationStateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
             dinoPosition -= 1;
 
@@ -120,6 +110,11 @@ public class GameScreen implements Screen {
 
         Vector2 position = dinoBody.getPosition();
         currentFrame = dinoAnimator.getWalkAnimation().getKeyFrame(0, true);
+
+        //if right is pressed calculate animation state time else reset it back to 0 (standing state)
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            dinoBody.applyLinearImpulse(500, 0, position.x,position.y, true);
+        }
         batch.draw(currentFrame,position.x,position.y, 50, 50); // Draw current frame at (50, 50)
         batch.end();
 
