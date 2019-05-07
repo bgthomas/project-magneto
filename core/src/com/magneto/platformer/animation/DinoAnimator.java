@@ -17,7 +17,7 @@ public class DinoAnimator {
     @Getter @Setter private Texture walkSheet;
     @Getter @Setter private SpriteBatch spriteBatch;
     @Getter @Setter private float stateTime;
-    @Getter @Setter private String direction;
+    @Getter @Setter private TextureRegion[] walkFrames;
 
     public DinoAnimator(){
         createTextures();
@@ -27,7 +27,7 @@ public class DinoAnimator {
     private void createTextures(){
         walkSheet = new Texture(Gdx.files.internal("dinoV2.png"));
 
-        TextureRegion[] walkFrames = generateWalkFrames(walkSheet);
+        walkFrames = generateWalkFrames(walkSheet);
 
         // Initialize the Animation with the frame interval and array of frames
         walkAnimation = new Animation<TextureRegion>(0.025f, walkFrames);
@@ -50,7 +50,9 @@ public class DinoAnimator {
         // Place the regions into a 1D array in the correct order, starting from the top
         // left, going across first. The Animation constructor requires a 1D array.
         TextureRegion[] walkFrames = new TextureRegion[FRAME_COLS * FRAME_ROWS];
+
         int index = 0;
+
         for (int i = 0; i < FRAME_ROWS; i++) {
             for (int j = 0; j < FRAME_COLS; j++) {
                 walkFrames[index++] = tmp[i][j];
@@ -58,5 +60,15 @@ public class DinoAnimator {
         }
 
         return walkFrames;
+    }
+
+    public void flipFrames(boolean flipX, boolean flipY){
+
+        TextureRegion[] frames = walkFrames;
+
+        for (TextureRegion frame : frames) {
+            frame.flip(flipX, flipY);
+        }
+
     }
 }

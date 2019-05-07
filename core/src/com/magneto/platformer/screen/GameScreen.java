@@ -78,12 +78,40 @@ public class GameScreen implements Screen {
         batch.begin();
 
         Vector2 position = dinoPhysics.getDinoBody().getPosition();
-        currentFrame = dinoAnimator.getWalkAnimation().getKeyFrame(dinoAnimationStateTime, true);
+
+        boolean flip = false;
 
         //if right is pressed calculate animation state time else reset it back to 0 (standing state)
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            dinoPhysics.getDinoBody().applyLinearImpulse(500, 0, position.x,position.y, true);
+            dinoPhysics.getDinoBody().applyForce(10000, 0, position.x,position.y, true);
             dinoAnimationStateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
+
+            if(dinoPhysics.getDirection() == "LEFT"){
+                flip = true;
+            }
+
+            dinoPhysics.setDirection("RIGHT");
+        }
+        else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+
+            dinoPhysics.getDinoBody().applyForce(-10000, 0, position.x,position.y, true);
+            dinoAnimationStateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
+
+            if(dinoPhysics.getDirection() == "RIGHT"){
+                flip = true;
+            }
+
+            dinoPhysics.setDirection("LEFT");
+
+        } else {
+            dinoAnimationStateTime = 0.0f;
+        }
+
+
+        currentFrame = dinoAnimator.getWalkAnimation().getKeyFrame(dinoAnimationStateTime, true);
+
+        if(flip){
+            dinoAnimator.flipFrames(true, false);
         }
 
         batch.draw(currentFrame,position.x,position.y, 50, 50); // Draw current frame at (50, 50)
