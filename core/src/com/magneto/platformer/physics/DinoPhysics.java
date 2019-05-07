@@ -1,4 +1,4 @@
-package com.magneto.platformer.physic;
+package com.magneto.platformer.physics;
 
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
@@ -7,7 +7,7 @@ import lombok.Setter;
 
 public class DinoPhysics {
 
-    @Getter @Setter private final Body dinoBody;
+    @Getter private final Body dinoBody;
     @Getter @Setter private String direction;
 
     public DinoPhysics(World world,PhysicsCacheManager physicsCacheManager){

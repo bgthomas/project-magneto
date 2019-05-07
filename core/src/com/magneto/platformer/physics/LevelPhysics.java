@@ -1,15 +1,14 @@
-package com.magneto.platformer.physic;
+package com.magneto.platformer.physics;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.physics.box2d.*;
 import lombok.Getter;
-import lombok.Setter;
 
 public class LevelPhysics {
 
-    private Body ground;
-    @Setter @Getter private World world;
-    @Setter @Getter private Camera camera;
+    @Getter private Body ground;
+    private World world;
+    private Camera camera;
 
     public LevelPhysics(World world, Camera camera){
         this.world = world;
@@ -19,7 +18,7 @@ public class LevelPhysics {
     public void createGround() {
 
         if (ground != null) {
-            getWorld().destroyBody(ground);
+            world.destroyBody(ground);
         }
 
         BodyDef bodyDef = new BodyDef();
@@ -28,7 +27,7 @@ public class LevelPhysics {
         FixtureDef fixtureDef = new FixtureDef();
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(getCamera().viewportWidth, 1);
+        shape.setAsBox(camera.viewportWidth, 1);
 
         fixtureDef.shape = shape;
         fixtureDef.friction = 1;

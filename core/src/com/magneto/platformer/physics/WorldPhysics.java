@@ -1,4 +1,4 @@
-package com.magneto.platformer.physic;
+package com.magneto.platformer.physics;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.World;
@@ -7,11 +7,11 @@ import lombok.Setter;
 
 public class WorldPhysics {
 
-    @Getter @Setter private float accumulator = 0;
-    @Getter @Setter static final float STEP_TIME = 1f / 60f;
-    @Getter @Setter static final int VELOCITY_ITERATIONS = 6;
-    @Getter @Setter static final int POSITION_ITERATIONS = 2;
-    @Setter @Getter private World world;
+    @Getter private float accumulator = 0;
+    @Getter private static final float STEP_TIME = 1f / 60f;
+    @Getter private static final int VELOCITY_ITERATIONS = 6;
+    @Getter private static final int POSITION_ITERATIONS = 2;
+    @Setter private World world;
 
     public WorldPhysics(World world){
         this.world = world;

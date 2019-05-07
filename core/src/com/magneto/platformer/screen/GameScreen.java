@@ -13,10 +13,10 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.magneto.platformer.Platformer;
 import com.magneto.platformer.animation.DinoAnimator;
-import com.magneto.platformer.physic.DinoPhysics;
-import com.magneto.platformer.physic.LevelPhysics;
-import com.magneto.platformer.physic.PhysicsCacheManager;
-import com.magneto.platformer.physic.WorldPhysics;
+import com.magneto.platformer.physics.DinoPhysics;
+import com.magneto.platformer.physics.LevelPhysics;
+import com.magneto.platformer.physics.PhysicsCacheManager;
+import com.magneto.platformer.physics.WorldPhysics;
 import lombok.NonNull;
 
 public class GameScreen implements Screen {
