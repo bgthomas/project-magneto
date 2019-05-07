@@ -1,4 +1,4 @@
-package com.magneto.platformer.physics;
+package com.magneto.platformer.entity.systems;
 
 import com.codeandweb.physicseditor.PhysicsShapeCache;
 import lombok.Getter;

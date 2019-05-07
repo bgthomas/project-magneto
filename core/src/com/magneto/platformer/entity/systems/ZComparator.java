@@ -11,7 +11,7 @@ public class ZComparator implements Comparator<Entity> {
     private ComponentMapper<TransformComponent> cmTrans;
 
     public ZComparator(){
-        cmTrans= ComponentMapper.getFor(TransformComponent.class);
+        cmTrans = ComponentMapper.getFor(TransformComponent.class);
     }
 
     @Override

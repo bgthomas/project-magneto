@@ -66,7 +66,6 @@ public class RenderingSystem extends SortedIteratingSystem {
                 continue;
             }
 
-            // ADD DRAW CODE HERE OTHERWISE NOTHING WILL HAPPEN
             batch.draw(tex.currentRegion,t.position.x,t.position.y, 50, 50); // Draw current frame at (50, 50)
 
         }

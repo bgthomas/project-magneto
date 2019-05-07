@@ -15,7 +15,7 @@ import com.magneto.platformer.Platformer;
 import com.magneto.platformer.animation.DinoAnimator;
 import com.magneto.platformer.physics.DinoPhysics;
 import com.magneto.platformer.physics.LevelPhysics;
-import com.magneto.platformer.physics.PhysicsCacheManager;
+import com.magneto.platformer.entity.systems.PhysicsCacheManager;
 import com.magneto.platformer.physics.WorldPhysics;
 import lombok.NonNull;
 
