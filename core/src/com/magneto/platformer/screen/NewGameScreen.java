@@ -6,7 +6,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -43,9 +45,11 @@ public class NewGameScreen implements Screen {
         // add all the relevant systems our engine should run
         engine.addSystem(new TextureSystem());
         engine.addSystem(new AnimationSystem());
-        engine.addSystem(renderingSystem);
         engine.addSystem(new PhysicsSystem(world));
         engine.addSystem(new PhysicsDebugSystem(world, renderingSystem.getCamera()));
+        engine.addSystem(new PlayerSystem(world));
+        engine.addSystem(renderingSystem);
+
         //engine.addSystem(new CollisionSystem());
         //engine.addSystem(new PlayerControlSystem(controller));
 
@@ -62,10 +66,10 @@ public class NewGameScreen implements Screen {
         TransformComponent position = engine.createComponent(TransformComponent.class);
         TextureComponent texture = engine.createComponent(TextureComponent.class);
         PlayerComponent player = engine.createComponent(PlayerComponent.class);
+        AnimationComponent animationCom = engine.createComponent(AnimationComponent.class);
         //CollisionComponent colComp = engine.createComponent(CollisionComponent.class);
         TypeComponent type = engine.createComponent(TypeComponent.class);
         StateComponent stateCom = engine.createComponent(StateComponent.class);
-        AnimationComponent animationCom = engine.createComponent(AnimationComponent.class);
 
         // create the data for the components and add them to the components
         body.body = physicsCacheManager.getPhysicsBodies().createBody("dinoSingle", world, 1.4f, 1.4f);
@@ -124,9 +128,7 @@ public class NewGameScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         engine.update(delta);
-
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.magneto.platformer.screen;
 
-import com.badlogic.gdx.Gdx;
+/*import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -17,11 +17,11 @@ import com.magneto.platformer.physics.DinoPhysics;
 import com.magneto.platformer.physics.LevelPhysics;
 import com.magneto.platformer.entity.systems.PhysicsCacheManager;
 import com.magneto.platformer.physics.WorldPhysics;
-import lombok.NonNull;
+import lombok.NonNull;*/
 
-public class GameScreen implements Screen {
+public class GameScreen  {
 
-    private final Platformer game;
+    /*private final Platformer game;
     private final OrthographicCamera camera;
     private final SpriteBatch batch;
     private final DinoAnimator dinoAnimator;
@@ -145,5 +145,5 @@ public class GameScreen implements Screen {
 
     @Override
     public void hide() {}
-
+*/
 }

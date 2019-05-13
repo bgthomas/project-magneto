@@ -37,10 +37,10 @@ public class MainMenuScreen implements Screen {
         game.getBitmapFont().draw(game.getSpriteBatch(), "Press the ENTER key to start!", 100, 100);
         game.getSpriteBatch().end();
 
-        if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+        /*if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
             game.setScreen(new GameScreen(game));
             dispose();
-        }
+        }*/
 
     }
 

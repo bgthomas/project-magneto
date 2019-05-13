@@ -19,10 +19,9 @@ public class PhysicsSystem extends IteratingSystem {
     private World world;
     private Array<Entity> bodiesQueue;
 
-    private ComponentMapper<BodyComponent> bm = ComponentMapper.getFor(BodyComponent.class);
-    private ComponentMapper<TransformComponent> tm = ComponentMapper.getFor(TransformComponent.class);
+    private ComponentMapper<BodyComponent> bodyMapper = ComponentMapper.getFor(BodyComponent.class);
+    private ComponentMapper<TransformComponent> transformMapper = ComponentMapper.getFor(TransformComponent.class);
 
-    @SuppressWarnings("unchecked")
     public PhysicsSystem(World world) {
         super(Family.all(BodyComponent.class, TransformComponent.class).get());
         this.world = world;
@@ -40,8 +39,8 @@ public class PhysicsSystem extends IteratingSystem {
 
             //Entity Queue
             for (Entity entity : bodiesQueue) {
-                TransformComponent tfm = tm.get(entity);
-                BodyComponent bodyComp = bm.get(entity);
+                TransformComponent tfm = transformMapper.get(entity);
+                BodyComponent bodyComp = bodyMapper.get(entity);
                 Vector2 position = bodyComp.body.getPosition();
                 tfm.position.x = position.x;
                 tfm.position.y = position.y;

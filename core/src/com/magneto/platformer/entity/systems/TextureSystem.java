@@ -11,7 +11,7 @@ import com.magneto.platformer.entity.components.TextureComponent;
 
 public class TextureSystem extends IteratingSystem {
 
-    ComponentMapper<TextureComponent> textureMapper;
+    private ComponentMapper<TextureComponent> textureMapper;
 
     public TextureSystem(){
         super(Family.all(TextureComponent.class).get());

@@ -12,11 +12,10 @@ import com.magneto.platformer.entity.components.TextureComponent;
 
 public class AnimationSystem extends IteratingSystem {
 
-    ComponentMapper<TextureComponent> textureMapper;
-    ComponentMapper<AnimationComponent> animationMapper;
-    ComponentMapper<StateComponent> stateMapper;
+    private ComponentMapper<TextureComponent> textureMapper;
+    private ComponentMapper<AnimationComponent> animationMapper;
+    private ComponentMapper<StateComponent> stateMapper;
 
-    @SuppressWarnings("unchecked")
     public AnimationSystem(){
         super(Family.all(TextureComponent.class,
                 AnimationComponent.class,
@@ -32,7 +31,6 @@ public class AnimationSystem extends IteratingSystem {
 
         AnimationComponent ani = animationMapper.get(entity);
         StateComponent state = stateMapper.get(entity);
-
         TextureComponent tex = textureMapper.get(entity);
 
         ani.animation = new Animation<TextureRegion>(0.025f, tex.region);
