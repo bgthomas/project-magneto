@@ -13,60 +13,61 @@ import com.magneto.platformer.screen.GameScreen;
 
 public class MainMenuScreen implements Screen {
 
-    private final Platformer game;
-    private final OrthographicCamera camera;
-    private AssetManager assetManager;
+  private final Platformer game;
+  private final OrthographicCamera camera;
+  private AssetManager assetManager;
 
-    public MainMenuScreen(Platformer game){
-        this.game = game;
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false, 800, 480);
-    }
+  public MainMenuScreen(Platformer game) {
+    this.game = game;
+    camera = new OrthographicCamera();
+    camera.setToOrtho(false, 800, 480);
+  }
 
-    @Override
-    public void render(final float delta) {
+  @Override
+  public void render(final float delta) {
 
-        //DEBUGGING TO SKIP SCREEN FOR NOW
+    // DEBUGGING TO SKIP SCREEN FOR NOW
 
-        Gdx.gl.glClearColor(0, 0, 0.2f, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    Gdx.gl.glClearColor(0, 0, 0.2f, 1);
+    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        // load loading images and wait until finished
-        assetManager = Assets.load();
-        assetManager.finishLoading();
+    // load loading images and wait until finished
+    assetManager = Assets.load();
+    assetManager.finishLoading();
 
-        game.setScreen(new NewGameScreen());
+    game.setScreen(new NewGameScreen());
+    dispose();
+
+    camera.update();
+    game.getSpriteBatch().setProjectionMatrix(camera.combined);
+
+    game.getSpriteBatch().begin();
+    game.getBitmapFont().draw(game.getSpriteBatch(), "Welcome to magneto :) ", 100, 150);
+    game.getBitmapFont().draw(game.getSpriteBatch(), "Press the ENTER key to start!", 100, 100);
+    game.getSpriteBatch().end();
+
+    /*if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+        game.setScreen(new GameScreen(game));
         dispose();
+    }*/
 
-        camera.update();
-        game.getSpriteBatch().setProjectionMatrix(camera.combined);
+  }
 
-        game.getSpriteBatch().begin();
-        game.getBitmapFont().draw(game.getSpriteBatch(), "Welcome to magneto :) ", 100, 150);
-        game.getBitmapFont().draw(game.getSpriteBatch(), "Press the ENTER key to start!", 100, 100);
-        game.getSpriteBatch().end();
+  @Override
+  public void resize(final int width, final int height) {}
 
-        /*if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
-            game.setScreen(new GameScreen(game));
-            dispose();
-        }*/
+  @Override
+  public void pause() {}
 
-    }
+  @Override
+  public void resume() {}
 
-    @Override
-    public void resize(final int width, final int height) {}
+  @Override
+  public void hide() {}
 
-    @Override
-    public void pause() {}
+  @Override
+  public void dispose() {}
 
-    @Override
-    public void resume() {}
-    @Override
-    public void hide() {}
-
-    @Override
-    public void dispose() {}
-
-    @Override
-    public void show() {}
+  @Override
+  public void show() {}
 }

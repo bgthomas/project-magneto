@@ -7,13 +7,12 @@ import lombok.Getter;
 
 public class AnimationComponent implements Component {
 
-    @Getter private ArrayMap<String, Animation> animations = new ArrayMap<String, Animation>();
+  @Getter private ArrayMap<String, Animation> animations = new ArrayMap<String, Animation>();
 
+  public AnimationComponent addAnimation(String stateName, Animation animation) {
 
-    public AnimationComponent addAnimation(String stateName, Animation animation){
+    this.animations.put(stateName, animation);
 
-        this.animations.put(stateName, animation);
-
-        return this;
-    }
+    return this;
+  }
 }

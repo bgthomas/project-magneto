@@ -57,6 +57,7 @@ project(":desktop") {
         annotationProcessor 'org.projectlombok:lombok:1.18.6'
         compile "com.codeandweb.physicseditor:gdx-pe-loader:1.1.0"
         compile "com.badlogicgames.ashley:ashley:1.7.3"
+        compile 'com.google.googlejavaformat:google-java-format:1.7'
     }
 }
 
@@ -77,6 +78,7 @@ project(":core") {
         annotationProcessor 'org.projectlombok:lombok:1.18.6'
         compile "com.codeandweb.physicseditor:gdx-pe-loader:1.1.0"
         compile "com.badlogicgames.ashley:ashley:1.7.3"
+        compile 'com.google.googlejavaformat:google-java-format:1.7'
     }
 }
 
