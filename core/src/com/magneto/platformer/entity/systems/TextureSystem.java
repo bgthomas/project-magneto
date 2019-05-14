@@ -21,11 +21,11 @@ public class TextureSystem extends IteratingSystem {
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
 
-        TextureComponent textureComponent = textureMapper.get(entity);
+        /*TextureComponent textureComponent = textureMapper.get(entity);
 
         Texture walkSheet = new Texture(Gdx.files.internal("dinoV2.png"));
 
-        textureComponent.region = generateWalkFrames(walkSheet);
+        textureComponent.region = generateWalkFrames(walkSheet);*/
 
     }
 

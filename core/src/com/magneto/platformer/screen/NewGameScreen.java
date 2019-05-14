@@ -14,6 +14,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.magneto.platformer.Assets;
 import com.magneto.platformer.entity.components.*;
 import com.magneto.platformer.entity.systems.*;
 import com.magneto.platformer.entity.systems.PhysicsCacheManager;
@@ -59,7 +60,9 @@ public class NewGameScreen implements Screen {
 
     }
 
+
     private void createPlayer(){
+
         // Create the Entity and all the components that will go in the entity
         Entity entity = engine.createEntity();
         BodyComponent body = engine.createComponent(BodyComponent.class);
@@ -82,6 +85,10 @@ public class NewGameScreen implements Screen {
         type.type = TypeComponent.PLAYER;
         stateCom.set(StateComponent.STATE_NORMAL);
         //b2dbody.body.setUserData(entity);
+
+        //Add textures and animations
+        entity.add(new AnimationComponent()
+                .addAnimation("DEFAULT", new Animation<TextureRegion>(0.025f, Assets.getDinoFrames())));
 
         // add the components to the entity
         entity.add(body);

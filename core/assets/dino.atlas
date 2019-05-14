@@ -1,0 +1,13 @@
+
+dino.png
+size: 512,32
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+dinoV2
+  rotate: false
+  xy: 2, 2
+  size: 310, 24
+  orig: 310, 24
+  offset: 0, 0
+  index: -1
