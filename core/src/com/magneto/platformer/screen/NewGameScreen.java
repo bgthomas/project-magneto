@@ -84,10 +84,9 @@ public class NewGameScreen implements Screen {
     stateCom.set(StateComponent.STATE_NORMAL);
     // b2dbody.body.setUserData(entity);
 
+    animationCom.addAnimation("DEFAULT", new Animation<TextureRegion>(0.025f, Assets.getDinoFrames()));
     // Add textures and animations
-    entity.add(
-        new AnimationComponent()
-            .addAnimation("DEFAULT", new Animation<TextureRegion>(0.025f, Assets.getDinoFrames())));
+    entity.add(animationCom);
 
     // add the components to the entity
     entity.add(body);

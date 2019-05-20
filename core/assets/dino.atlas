@@ -1,13 +1,104 @@
 
-dino.png
+dinoV2.png
 size: 512,32
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-dinoV2
+dino
   rotate: false
   xy: 2, 2
-  size: 310, 24
-  orig: 310, 24
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+dino
+  rotate: false
+  xy: 2, 2
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+dino
+  rotate: false
+  xy: 2, 2
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+dino
+  rotate: false
+  xy: 2, 2
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+dino
+  rotate: false
+  xy: 26, 2
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+dino
+  rotate: false
+  xy: 50, 2
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+dino
+  rotate: false
+  xy: 74, 2
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+dino
+  rotate: false
+  xy: 98, 2
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+dino
+  rotate: false
+  xy: 122, 2
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+dino
+  rotate: false
+  xy: 146, 2
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+dino
+  rotate: false
+  xy: 170, 2
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+dino
+  rotate: false
+  xy: 194, 2
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+dino
+  rotate: false
+  xy: 218, 2
+  size: 22, 24
+  orig: 22, 24
+  offset: 0, 0
+  index: -1
+dino
+  rotate: false
+  xy: 242, 2
+  size: 22, 24
+  orig: 22, 24
   offset: 0, 0
   index: -1

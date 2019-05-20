@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Array;
 import lombok.Getter;
 
 public class Assets {
@@ -17,12 +18,11 @@ public class Assets {
     assetManager = new AssetManager();
 
     assetManager.load(DINO_ATLAS, TEXTURE_ATLAS);
-    // assetManager.get(Gdx.files.internal("dino.atlas").path(),
-    // TEXTURE_ATLAS).findRegion("dinoV2");
+
     return assetManager;
   }
 
-  public static TextureRegion getDinoFrames() {
-    return assetManager.get(DINO_ATLAS, TEXTURE_ATLAS).findRegion("dinoV2");
+  public static Array<TextureAtlas.AtlasRegion> getDinoFrames() {
+    return assetManager.get(DINO_ATLAS, TEXTURE_ATLAS).findRegions("dino");
   }
 }

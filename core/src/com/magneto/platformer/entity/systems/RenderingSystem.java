@@ -69,7 +69,7 @@ public class RenderingSystem extends SortedIteratingSystem {
       }
 
       batch.draw(
-          tex.currentRegion, t.position.x, t.position.y, 50, 50); // Draw current frame at (50, 50)
+          tex.region, t.position.x, t.position.y, 50, 50); // Draw current frame at (50, 50)
     }
 
     batch.end();
